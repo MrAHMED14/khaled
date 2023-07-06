@@ -1,13 +1,7 @@
-NextAuth with MongoDB(mongoose) + Server Actions
+NextAuth with MongoDB + Server Actions
 
 I. Main functions.
   - SignIn with OAuth ( Google )
-  - SignIn with Credentials ( Email, Password )
-  - SignUp with Name, Email, Password
-  - Verify Email
-  - Update Profile
-  - Change Password
-  - Forgot Password
   - Middleware to secure certain pages
 
 II. Implementation Guide.
@@ -28,7 +22,7 @@ II. Implementation Guide.
       }
 
   2. Setup Libraries
-    - npm i mongoose next-auth bcrypt jsonwebtoken nodemailer
+    - npm i mongoose next-auth jsonwebtoken nodemailer
 
   3. Config Next-Auth
     - context => Provider
@@ -41,7 +35,6 @@ II. Implementation Guide.
     - Protected (client, server)
     - Profile (client, server)
     - Signin, SignUp
-    - Admin Dashboard
 
   5. SignIn with Oauth ( Google ) without Database
     - Import GoogleProvider 
@@ -103,49 +96,9 @@ II. Implementation Guide.
     - updateUser Action
     - Button Component
 
-  11. Update and Re-Render User Profile
-    - update({name, image}) on Client-Side
-    - Fix Re-Render on Server Side
-      + The page server side only renders for the first time, 
-      + The next times will not re-render, so we will combine with the client side.
-      + The first time will render the server side, the next time will render the client side.
+  12. Middleware protect routes based on role Admin
 
-  12. Sign Up with Credentials (name, email, password)
-    - SignUp Component
-    - signUpWithCredentials Action
-
-  13. Handle Errors
-    - Errors page
-  
-  14. Token + Send Email
-    - .env 
-      + TOKEN_SECRET=YOUR_SECRET ( openssl rand -base64 32 ) 
-      + EMAIL_USER
-      + EMAIL_PASSWORD
-
-  15. Verify Email to complete the registration
-    - Verify Page
-    - verifyEmailWithCredentials Action
-
-  16. SignIn with Credentials (email, password)
-    - import CredentialsProvider
-    - async authorize => signInWithCredentials Action
-
-  17. Change Password
-    - ChangePassword Component
-    - userActions => changePassword
-
-  18. Forgot Passoword
-    - authActions => forgotPasswordWithCredentials
-  
-  19. Reset Password
-    - reset_password page
-    - ResetPassword Component
-    - authActions => resetPasswordWithCredentials
-
-  20. Middleware protect routes based on role Admin
-
-  21. Deploy Vercel
+  13. Deploy Vercel
     - run build => test
     - push to github
     - deploy vercel
