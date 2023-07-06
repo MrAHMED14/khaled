@@ -6,7 +6,7 @@ const Modal = ({ setModelState, modelState, children }) => {
       >
         <div className="modal-box relative ">
           <label
-            className="btn btn-sm btn-circle text-black absolute right-2 top-2 "
+            className="btn btn-sm btn-circle bg-slate-900 hover:bg-slate-800 text-white absolute right-2 top-2 "
             onClick={() => setModelState(false)}
           >
             ✕

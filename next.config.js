@@ -9,6 +9,7 @@ const nextConfig = {
       "images.pexels.com",
       "wallpapercave.com",
       "w7.pngwing.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };

@@ -1,6 +1,6 @@
 import getAllPost from "@/libs/posts";
-import AddPostForm from "@/components/global/AddPostForm";
-import Post from "@/components/global/Post";
+import AddPostForm from "../components/global/AddPostForm";
+import Post from "../components/global/Post";
 const Blog = async () => {
   const { posts } = await getAllPost();
   return (

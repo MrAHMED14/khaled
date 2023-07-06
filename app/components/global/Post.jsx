@@ -6,7 +6,7 @@ const Post = async ({ userId, title, body, createdAt }) => {
   const date = createdAt.toLocaleDateString();
   const time = createdAt.toLocaleTimeString();
   return (
-    <div className="card w-[300px] min-[400px]:w-96 lg:w-[500px] bg-base-100 shadow-xl">
+    <div className="card w-[300px] min-[400px]:w-96 lg:w-[500px] bg-base-100 text-gray-950 shadow-xl">
       <div className="flex items-center justify-between px-5 pt-5 pb-2">
         <div className="flex items-center gap-1 min-[400px]:gap-3">
           <div className="relative h-10 w-10">
