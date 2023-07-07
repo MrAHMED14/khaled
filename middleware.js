@@ -1,17 +1,15 @@
 export { default } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
-  const SessionCookiesProduction = request.cookies.has(
-    "__Secure-next-auth.session-token"
+export function middleware(req) {
+  const URI = encodeURIComponent(req.url);
+  const sessionCookies = req.cookies.has(
+    "next-auth.session-token" || "__Secure-next-auth.session-token"
   );
 
-  if (!SessionCookiesProduction)
+  if (!sessionCookies)
     return NextResponse.redirect(
-      new URL(
-        `/signin?callbackUrl=${encodeURIComponent(request.url)}`,
-        request.url
-      )
+      new URL(`/signin?callbackUrl=${URI}`, req.url)
     );
 }
 
