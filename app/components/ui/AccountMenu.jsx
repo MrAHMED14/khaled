@@ -8,7 +8,7 @@ import Link from "next/link";
 const AccountMenu = ({ name, email, image }) => {
   return (
     <>
-      <Menu as="div" className="relative z-[9999]">
+      <Menu as="div" className="relative z-[99]">
         <Menu.Button>
           <div className="relative h-8 w-8">
             {image ? (

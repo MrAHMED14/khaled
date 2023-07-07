@@ -25,7 +25,7 @@ export const authOption = {
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      return token;
+      return account;
     },
   },
   pages: {

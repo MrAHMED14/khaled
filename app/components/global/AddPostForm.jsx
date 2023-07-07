@@ -1,19 +1,17 @@
 "use client";
 
-import { createPostAction } from "@/app/_action";
-import { authOption } from "@/app/api/auth/[...nextauth]/route";
-import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
 import Modal from "../ui/Modal";
+import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { createPostAction } from "@/app/_action";
+import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const AddPostForm = () => {
+  const { resolvedTheme } = useTheme();
   const formRef = useRef(null);
   const [modelState, setModelState] = useState(false);
-
-  const [isFetching, setIsFetching] = useState(false);
-  const isMutating = isFetching;
-
   const { data: session } = useSession(authOption);
 
   const action = async (data) => {
@@ -22,24 +20,18 @@ const AddPostForm = () => {
     const userId = session?.user.id;
 
     if (title.length >= 1 && body.length >= 1 && userId) {
-      //disable btn
-      setIsFetching(true);
-
       await createPostAction(title, body, userId);
-
       setModelState(false);
       formRef.current?.reset();
-      setIsFetching(false);
     } else {
       toast.error("Please check your info", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        theme: "light",
+        theme: resolvedTheme,
+        type: "error",
+        autoClose: 2000,
       });
     }
   };
+
   return (
     <>
       <ToastContainer />
@@ -71,16 +63,18 @@ const AddPostForm = () => {
               className="input border-slate-800 mb-4"
             />
 
-            <button
-              disabled={isMutating}
-              className="btn disabled:cursor-not-allowed font-bold bg-slate-900 hover:bg-slate-800 text-white"
-            >
+            <button className="btn disabled:cursor-not-allowed font-bold bg-slate-900 hover:bg-slate-800 text-white">
               Submit
             </button>
+            <p className="text-slate-50 font-medium text-sm p-1 rounded bg-gray-950 mt-1">
+              <span className="font-bold text-yellow-400">warning: </span>
+              Press submit button once!
+            </p>
           </form>
         </div>
       </Modal>
     </>
   );
 };
+
 export default AddPostForm;
