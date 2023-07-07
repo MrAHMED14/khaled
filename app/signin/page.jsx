@@ -1,16 +1,6 @@
-"use client";
 import { GithubBtn, GoogleBtn, TwitterBtn } from "../components/ui/LoginBtns";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 const SignInPage = ({ searchParams: { callbackUrl } }) => {
-  const router = useRouter();
-  const { data: session } = useSession();
-
-  if (session) {
-    router.push("/");
-    return;
-  }
   return (
     <div className="container flex justify-center items-center">
       <div className="card justify-center items-center w-96 text-gray-950 bg-base-100 shadow-xl">
