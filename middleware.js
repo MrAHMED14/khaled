@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 
 export function middleware(req) {
   const URI = encodeURIComponent(req.url);
-  const sessionCookies = req.cookies.has(
-    "next-auth.session-token" || "__Secure-next-auth.session-token"
-  );
+  const sessionCookies = req.cookies.has("__Secure-next-auth.session-token");
 
   if (!sessionCookies)
     return NextResponse.redirect(
