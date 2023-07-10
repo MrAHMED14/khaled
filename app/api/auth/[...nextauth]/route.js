@@ -6,6 +6,9 @@ import GitHubProvider from "next-auth/providers/github";
 
 export const authOption = {
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -20,12 +23,12 @@ export const authOption = {
     async signIn({ user, account, profile, email, credentials }) {
       return true;
     },
-    async session({ session, token, user }) {
-      session.user.id = user.id;
+    async session({ session, token }) {
+      session.user.id = token.sub;
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
-      return account;
+    async jwt({ token }) {
+      return token;
     },
   },
   pages: {

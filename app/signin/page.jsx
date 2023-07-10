@@ -1,6 +1,12 @@
+import { getServerSession } from "next-auth";
 import { GithubBtn, GoogleBtn, TwitterBtn } from "../components/ui/LoginBtns";
-
-const SignInPage = ({ searchParams: { callbackUrl } }) => {
+import { authOption } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
+const SignInPage = async ({ searchParams: { callbackUrl } }) => {
+  const session = await getServerSession(authOption);
+  if (session) {
+    redirect("/");
+  }
   return (
     <div className="container flex justify-center items-center">
       <div className="card justify-center items-center w-96 text-gray-950 bg-base-100 shadow-xl">
